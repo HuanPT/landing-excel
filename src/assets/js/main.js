@@ -94,6 +94,29 @@ $(function () {
     items: 1,
   });
 
+  $(window).on("scroll", function () {
+    // get the current scroll position
+    let scrollPosition = $(this).scrollTop();
+
+    // loop through each anchor tag in the navbar
+    $(".navbar-nav a").each(function () {
+      // get the target element's position
+      let targetPosition = $($(this).attr("href")).offset().top - 1;
+
+      // check if the target element is in the visible area of the viewport
+      if (
+        targetPosition <= scrollPosition &&
+        targetPosition + $($(this).attr("href")).outerHeight() > scrollPosition
+      ) {
+        // add the active class to the current anchor tag
+        $(this).addClass("active");
+
+        // remove the active class from all other anchor tags
+        $(".navbar-nav a").not(this).removeClass("active");
+      }
+    });
+  });
+
   checkErr(email, "Email không đúng");
   checkErr(phone, "Số điện thoại không đúng");
   checkErr(username, "Tên không được để trống");

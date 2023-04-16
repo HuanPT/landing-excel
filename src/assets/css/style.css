@@ -317,7 +317,7 @@ header {
 .nav-link:focus,
 .nav-link:active,
 .nav-link.active {
-    color: var(--yellow-color);
+    color: var(--yellow-color) !important;
     border-bottom: 2px solid var(--yellow-color);
 }
 
@@ -531,7 +531,7 @@ header {
 .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
     position: relative;
     background: #277BC0;
-    padding: 1.5em;
+    padding-inline: 24px;
     margin-left: 60px;
     background-clip: padding-box;
     margin-bottom: 5px;
@@ -573,7 +573,8 @@ header {
     font-weight: 600;
     color: #fff;
     margin: 0;
-    padding: 0;
+    padding-inline: 0;
+    padding-block: 24px;
     background-color: transparent;
 }
 
@@ -618,10 +619,6 @@ header {
 
 .accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFFFFF'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
-}
-
-#content .accordion-body {
-    padding-bottom: 0;
 }
 
 .accordion-body ul {
