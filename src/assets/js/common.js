@@ -244,7 +244,8 @@ const AJAX = async function (url, uploadData = undefined) {
 
 export const postRegister = async function (data) {
   try {
-    const id = window.location.href.split("#")[0];
+    const id = window.location.host;
+
     const req = {
       FullName: data.fullName,
       Email: data.email,
@@ -253,16 +254,15 @@ export const postRegister = async function (data) {
       Link: id,
       ItemId: "PFqWCBgY",
     };
-
     const res = await AJAX(API_URL, req);
     clearInputs();
     showSuccessToast(
-      "Thành công",
+      "Thành công!",
       "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
     );
     console.log(res);
   } catch (error) {
-    showErrorToast("Lỗi, hãy thử lại!", "");
+    showErrorToast("Lỗi!", "Hãy thử lại!");
     throw error;
   }
 };

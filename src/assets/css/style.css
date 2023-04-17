@@ -370,6 +370,11 @@ header {
     /* padding-bottom: 56.25%; */
 }
 
+.banner__item img {
+    max-height: 500px;
+}
+
+
 #banner-slide:hover .owl-nav {
     opacity: 1;
 }
@@ -440,7 +445,7 @@ header {
 }
 
 .owl-theme .owl-dots .owl-dot span {
-    background-color: #fff;
+    background-color: #ccc;
 }
 
 /* Target */
@@ -467,8 +472,9 @@ header {
 }
 
 .wrap__target-img {
+    overflow: hidden;
     border-radius: 50px;
-    background-color: #fff;
+    box-shadow: -6px -6px 0 0 var(--excel-color);
     border: 2px dashed var(--excel-color);
 }
 
@@ -680,7 +686,7 @@ header {
     color: var(--secondary-color);
 }
 
-.fee__title h3 {
+.fee__title>* {
     margin: 0;
 }
 
@@ -870,6 +876,10 @@ header {
 
 .contact__detail ol li {
     margin-block: 10px;
+}
+
+.media__content {
+    margin-left: 20px;
 }
 
 /* Form */

@@ -90,7 +90,7 @@ function addHandlerSubmit(form, handler) {
 }
 
 $(function () {
-  $(".owl-carousel").owlCarousel({
+  $("#banner-slide").owlCarousel({
     loop: true, // lặp lại các item
     margin: 10, // Khoảng cách giữa các item
     nav: true, // thanh điều hướng
@@ -98,6 +98,46 @@ $(function () {
     autoplay: true,
     autoplayTimeout: 7000,
     smartSpeed: 700,
+    navText: [
+      `<span aria-label= "Previous">
+        <i class="fa-solid fa-angle-left"></i>
+      </span>`,
+
+      `<span aria-label= "Next">
+        <i class="fa-solid fa-angle-right"></i>
+      </span>`,
+    ],
+    items: 1,
+  });
+
+  $("#banner-slide").owlCarousel({
+    loop: true, // lặp lại các item
+    margin: 10, // Khoảng cách giữa các item
+    nav: true, // thanh điều hướng
+    dots: true, // dấu chấm
+    autoplay: true,
+    autoplayTimeout: 7000,
+    smartSpeed: 700,
+    navText: [
+      `<span aria-label= "Previous">
+        <i class="fa-solid fa-angle-left"></i>
+      </span>`,
+
+      `<span aria-label= "Next">
+        <i class="fa-solid fa-angle-right"></i>
+      </span>`,
+    ],
+    items: 1,
+  });
+
+  $("#target__slide").owlCarousel({
+    loop: true, // lặp lại các item
+    margin: 10, // Khoảng cách giữa các item
+    // nav: true, // thanh điều hướng
+    dots: true, // dấu chấm
+    autoplay: true,
+    autoplayTimeout: 5000,
+    smartSpeed: 500,
     navText: [
       `<span aria-label= "Previous">
         <i class="fa-solid fa-angle-left"></i>
