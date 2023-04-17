@@ -3,3 +3,31 @@
         bottom: 10px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .target__list {
+        gap: 10px
+    }
+}
+
+@media (max-width: 991px) {
+    #header .navbar-collapse {
+        position: fixed;
+        padding-top: 70px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 8;
+        /* kích hoạt thanh cuộn nếu nội dung vượt quá kích thước màn hình */
+        margin-inline: 0;
+        background-color: var(--secondary-color);
+        transition: all .3s;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    body {
+        overflow: auto !important;
+    }
+}

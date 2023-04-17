@@ -1,3 +1,6 @@
+const TIMEOUT_SEC = 10;
+const API_URL = "https://techmaster.vn/submit-advisory";
+
 export function backToTop() {
   window.scrollTo({
     top: 0,
@@ -141,7 +144,7 @@ export function checkInputs(username, email, phone) {
   const usernameValue = username.value.trim();
   const emailValue = email.value.trim();
   const phoneValue = phone.value.trim();
-  console.log(usernameValue, emailValue, phoneValue);
+  // console.log(usernameValue, emailValue, phoneValue);
   if (usernameValue === "") {
     // console.log("name error");
     // console.log(usernameValue);
@@ -173,6 +176,27 @@ export function checkInputs(username, email, phone) {
   return isValid;
 }
 
+export function clearInputs() {
+  // Làm sạch giá trị của các input trong form
+  document.querySelector("#note").value = "";
+  document.querySelector("#phone").value = "";
+  document.querySelector("#email").value = "";
+  document.querySelector("#username").value = "";
+}
+
+export function updateIcon() {
+  const $navbarToggler = $(".navbar-toggler");
+  const $iconUse = $navbarToggler.find("use");
+  const isExpanded = $navbarToggler.attr("aria-expanded") === "true";
+
+  $("body").css("overflow", isExpanded ? "hidden" : "auto");
+
+  $iconUse.attr(
+    "href",
+    isExpanded ? "/img/icon.svg#icon-xmark" : "/img/icon.svg#icon-menu"
+  );
+}
+
 export function setError(input, message) {
   input.style.border = "thin solid #ff0000";
   input.nextElementSibling.innerHTML = message;
@@ -182,3 +206,63 @@ export function setSuccess(input) {
   input.style.border = "thin solid #47d864";
   input.nextElementSibling.innerHTML = "";
 }
+
+// tạo lỗi về thời gian yêu từ api
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Yêu cầu mất nhiều thời gian! Đã đợi hết ${s} giây`));
+    }, s * 1000);
+  });
+};
+
+const AJAX = async function (url, uploadData = undefined) {
+  try {
+    const fetchPro = uploadData
+      ? fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(uploadData),
+        })
+      : fetch(url);
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    // tạo lỗi api
+    if (!res.ok) throw new Error(`${res.status}`);
+
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const postRegister = async function (data) {
+  try {
+    const id = window.location.href.split("#")[0];
+    const req = {
+      FullName: data.fullName,
+      Email: data.email,
+      Phone: data.phone,
+      Note: data.note,
+      Link: id,
+      ItemId: "PFqWCBgY",
+    };
+
+    const res = await AJAX(API_URL, req);
+    clearInputs();
+    showSuccessToast(
+      "Thành công",
+      "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+    );
+    console.log(res);
+  } catch (error) {
+    showErrorToast("Lỗi, hãy thử lại!", "");
+    throw error;
+  }
+};

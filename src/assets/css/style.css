@@ -32,6 +32,7 @@ body {
     background-image: url("../img/bg-luoi.png");
     background-position: 50% 0%;
     background-repeat: repeat;
+    overflow: auto;
 }
 
 ul {
@@ -293,11 +294,13 @@ header {
 }
 
 #header .navbar-collapse {
-    margin-inline: 20px;
+    margin-inline: 30px;
 }
 
 #header .navbar-brand img {
     height: 45px;
+    max-width: 116px;
+    object-fit: contain;
 }
 
 #header .nav-item {
@@ -330,6 +333,7 @@ header {
 }
 
 .navbar-brand {
+    z-index: 9;
     margin-inline: 20px;
 }
 
@@ -338,8 +342,9 @@ header {
 }
 
 .navbar-toggler {
-    margin-right: 20px;
+    z-index: 9;
     border: 0;
+    margin-right: 20px;
 }
 
 .menu__icon {

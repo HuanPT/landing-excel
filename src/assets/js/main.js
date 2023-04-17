@@ -24,6 +24,9 @@ import {
   setSuccess,
   showErrorToast,
   showSuccessToast,
+  updateIcon,
+  postRegister,
+  clearInputs,
 } from "./common";
 
 const trackID = "";
@@ -32,9 +35,6 @@ const note = document.querySelector("#note");
 const phone = document.querySelector("#phone");
 const email = document.querySelector("#email");
 const username = document.querySelector("#username");
-let isTrue = false;
-
-console.log(username, email, phone, note, form);
 
 const checkErr = (input, message) => {
   const validationFunc = () => {
@@ -56,22 +56,38 @@ const checkErr = (input, message) => {
   input.addEventListener("blur", validationFunc);
 };
 
-const formSubmit = (e) => {
-  e.preventDefault(); // ngăn chặn trang web bị load lại sau khi submit
-  const isFormValid = checkInputs(username, email, phone);
-  if (isFormValid) {
-    form.submit(); // Submit form
-    username.value = "";
-    email.value = "";
-    phone.value = "";
-    showSuccessToast(
-      "Thành công",
-      "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
-    );
-  } else {
-    showErrorToast("Lỗi", "Hãy điền đầy đủ thông tin!");
-  }
-};
+// const formSubmit = (e) => {
+//   e.preventDefault(); // ngăn chặn trang web bị load lại sau khi submit
+//   const isFormValid = checkInputs(username, email, phone);
+//   if (isFormValid) {
+//     form.submit(); // Submit form
+//     username.value = "";
+//     email.value = "";
+//     phone.value = "";
+//     note.value = "";
+//     showSuccessToast(
+//       "Thành công",
+//       "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
+//     );
+//   } else {
+//     showErrorToast("Lỗi", "Hãy điền đầy đủ thông tin!");
+//   }
+// };
+
+// console.log(form);
+function addHandlerSubmit(form, handler) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const isFormValid = checkInputs(username, email, phone);
+    if (isFormValid) {
+      const dataArr = new FormData(form);
+      const data = Object.fromEntries(dataArr);
+      handler(data);
+    } else {
+      showErrorToast("Đăng ký không thành công", "");
+    }
+  });
+}
 
 $(function () {
   $(".owl-carousel").owlCarousel({
@@ -94,34 +110,49 @@ $(function () {
     items: 1,
   });
 
+  // Cache DOM selections
+  const $navbarLinks = $(".navbar-nav>li>a");
+  const $navbarToggler = $(".navbar-toggler");
+
+  // Click hidden navbar mobile
+  $navbarLinks.on("click", function () {
+    if (window.innerWidth < 992) {
+      $navbarToggler.click();
+      updateIcon();
+    }
+  });
+
+  // // Toggle icon
+  $navbarToggler.on("click", function () {
+    updateIcon();
+  });
+
+  // Scroll active navbar
   $(window).on("scroll", function () {
-    // get the current scroll position
-    let scrollPosition = $(this).scrollTop();
+    const scrollPosition = $(this).scrollTop();
 
-    // loop through each anchor tag in the navbar
-    $(".navbar-nav a").each(function () {
-      // get the target element's position
-      let targetPosition = $($(this).attr("href")).offset().top - 1;
+    $navbarLinks.each(function () {
+      const target = $($(this).attr("href"));
+      const targetPosition = target.offset().top - 1;
+      const targetHeight = target.outerHeight();
 
-      // check if the target element is in the visible area of the viewport
       if (
         targetPosition <= scrollPosition &&
-        targetPosition + $($(this).attr("href")).outerHeight() > scrollPosition
+        targetPosition + targetHeight > scrollPosition
       ) {
-        // add the active class to the current anchor tag
+        $navbarLinks.removeClass("active");
         $(this).addClass("active");
-
-        // remove the active class from all other anchor tags
-        $(".navbar-nav a").not(this).removeClass("active");
       }
     });
   });
+
+  addHandlerSubmit(form, postRegister);
 
   checkErr(email, "Email không đúng");
   checkErr(phone, "Số điện thoại không đúng");
   checkErr(username, "Tên không được để trống");
 
-  form.addEventListener("submit", formSubmit);
+  // form.addEventListener("submit", formSubmit);
   Fancybox.bind();
   headerOnTop();
   backGoToTop();
