@@ -371,7 +371,7 @@ header {
 }
 
 .banner__item img {
-    max-height: 500px;
+    max-height: 450px;
 }
 
 
@@ -474,6 +474,7 @@ header {
 .wrap__target-img {
     overflow: hidden;
     border-radius: 50px;
+    background: #fff;
     box-shadow: -6px -6px 0 0 var(--excel-color);
     border: 2px dashed var(--excel-color);
 }
@@ -829,8 +830,13 @@ header {
     margin: 0 auto;
     overflow: hidden;
     border-radius: 20px 40px;
-    box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.1);
+    transition: all .3s;
     border: 2px dashed var(--techmaster-color);
+    box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.result__img:hover {
+    transform: translateY(-10px) !important;
 }
 
 /* FAQ */

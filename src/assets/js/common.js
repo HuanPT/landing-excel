@@ -252,7 +252,7 @@ export const postRegister = async function (data) {
       Phone: data.phone,
       Note: data.note,
       Link: id,
-      ItemId: "PFqWCBgY",
+      ItemId: "",
     };
     const res = await AJAX(API_URL, req);
     clearInputs();
@@ -260,7 +260,7 @@ export const postRegister = async function (data) {
       "Thành công!",
       "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
     );
-    console.log(res);
+    // console.log(res);
   } catch (error) {
     showErrorToast("Lỗi!", "Hãy thử lại!");
     throw error;

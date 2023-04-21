@@ -56,25 +56,6 @@ const checkErr = (input, message) => {
   input.addEventListener("blur", validationFunc);
 };
 
-// const formSubmit = (e) => {
-//   e.preventDefault(); // ngăn chặn trang web bị load lại sau khi submit
-//   const isFormValid = checkInputs(username, email, phone);
-//   if (isFormValid) {
-//     form.submit(); // Submit form
-//     username.value = "";
-//     email.value = "";
-//     phone.value = "";
-//     note.value = "";
-//     showSuccessToast(
-//       "Thành công",
-//       "Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất!"
-//     );
-//   } else {
-//     showErrorToast("Lỗi", "Hãy điền đầy đủ thông tin!");
-//   }
-// };
-
-// console.log(form);
 function addHandlerSubmit(form, handler) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -96,26 +77,7 @@ $(function () {
     nav: true, // thanh điều hướng
     dots: true, // dấu chấm
     autoplay: true,
-    autoplayTimeout: 7000,
-    smartSpeed: 700,
-    navText: [
-      `<span aria-label= "Previous">
-        <i class="fa-solid fa-angle-left"></i>
-      </span>`,
-
-      `<span aria-label= "Next">
-        <i class="fa-solid fa-angle-right"></i>
-      </span>`,
-    ],
-    items: 1,
-  });
-
-  $("#banner-slide").owlCarousel({
-    loop: true, // lặp lại các item
-    margin: 10, // Khoảng cách giữa các item
-    nav: true, // thanh điều hướng
-    dots: true, // dấu chấm
-    autoplay: true,
+    autoplayHoverPause: true, //hover sẽ tạm dừng play
     autoplayTimeout: 7000,
     smartSpeed: 700,
     navText: [
@@ -133,20 +95,10 @@ $(function () {
   $("#target__slide").owlCarousel({
     loop: true, // lặp lại các item
     margin: 10, // Khoảng cách giữa các item
-    // nav: true, // thanh điều hướng
     dots: true, // dấu chấm
     autoplay: true,
     autoplayTimeout: 5000,
     smartSpeed: 500,
-    navText: [
-      `<span aria-label= "Previous">
-        <i class="fa-solid fa-angle-left"></i>
-      </span>`,
-
-      `<span aria-label= "Next">
-        <i class="fa-solid fa-angle-right"></i>
-      </span>`,
-    ],
     items: 1,
   });
 
