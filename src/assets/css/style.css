@@ -835,10 +835,6 @@ header {
     box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.1);
 }
 
-.result__img:hover {
-    transform: translateY(-10px) !important;
-}
-
 /* FAQ */
 #accordionFaq {
     margin: 0 auto;
