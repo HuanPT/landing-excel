@@ -31,3 +31,13 @@
         overflow: auto !important;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .col-sm-6:nth-of-type(1) .card__fee {
+        margin-inline: auto 0;
+    }
+
+    .col-sm-6:nth-of-type(3) .card__fee {
+        margin-inline: 0 auto;
+    }
+}
